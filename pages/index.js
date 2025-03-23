@@ -1,11 +1,37 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [isVerticalSplit, setIsVerticalSplit] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsVerticalSplit(window.innerWidth > window.innerHeight);
+    };
+
+    // Initial check on mount
+    handleResize();
+
+    // Listen for window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div className="h-screen w-screen flex">
+    <div
+      className={`h-screen w-screen flex ${
+        isVerticalSplit ? "flex-row" : "flex-col"
+      }`}
+    >
       <a
         href="https://blog.anders-lauridsen.dk"
-        className="w-1/2 h-full relative overflow-hidden group"
+        className={`relative overflow-hidden group ${
+          isVerticalSplit ? "w-1/2 h-full" : "w-full h-1/2"
+        }`}
       >
         <div className="relative h-full w-full">
           <Image
@@ -13,7 +39,7 @@ export default function Home() {
             alt="Blog Image"
             fill
             priority
-            sizes="50vw"
+            sizes={isVerticalSplit ? "50vw" : "50vh"}
             className="object-cover transition-transform duration-500 filter grayscale-[30%] brightness-[50%] group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110"
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-opacity-30">
@@ -24,7 +50,9 @@ export default function Home() {
       </a>
       <a
         href="https://photos.anders-lauridsen.dk"
-        className="w-1/2 h-full relative overflow-hidden group"
+        className={`relative overflow-hidden group ${
+          isVerticalSplit ? "w-1/2 h-full" : "w-full h-1/2"
+        }`}
       >
         <div className="relative h-full w-full">
           <Image
@@ -32,7 +60,7 @@ export default function Home() {
             alt="Portfolio Image"
             fill
             priority
-            sizes="50vw"
+            sizes={isVerticalSplit ? "50vw" : "50vh"}
             className="object-cover transition-transform duration-500 filter grayscale-[30%] brightness-[50%] group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110"
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-opacity-30">
