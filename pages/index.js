@@ -49,7 +49,7 @@ export default function Home() {
         </div>
       </a>
       <a
-        href="https://fotos.anders-lauridsen.dk"
+        href="https://lauridsen-fotos.dk"
         className={`relative overflow-hidden group ${
           isVerticalSplit ? "w-1/2 h-full" : "w-full h-1/2"
         }`}
@@ -65,7 +65,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-opacity-30">
             <span className="text-white text-4xl font-bold mb-2">Photos</span>
-            {/* <span className="text-white text-2xl font-bold">fotos.anders-lauridsen.dk</span> */}
+            {/* <span className="text-white text-2xl font-bold">lauridsen-fotos.dk</span> */}
           </div>
         </div>
       </a>
